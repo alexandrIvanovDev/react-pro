@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 
 import type { Task } from 'entities/task/model/types';
 
@@ -20,21 +20,27 @@ export const useTasks = (initial: Task[]) => {
     }
   }, [tasks, filter]);
 
-  const removeTask = (id: string) => {
-    setTasks(tasks.filter((el) => el.id !== id));
-  };
+  const removeTask = useCallback(
+    (id: string) => {
+      setTasks(tasks.filter((el) => el.id !== id));
+    },
+    [tasks],
+  );
 
-  const toggleTask = (id: string, newValue: boolean) => {
-    setTasks(
-      tasks.map((el) => {
-        if (el.id === id) {
-          return { ...el, completed: newValue };
-        } else {
-          return el;
-        }
-      }),
-    );
-  };
+  const toggleTask = useCallback(
+    (id: string, newValue: boolean) => {
+      setTasks(
+        tasks.map((el) => {
+          if (el.id === id) {
+            return { ...el, completed: newValue };
+          } else {
+            return el;
+          }
+        }),
+      );
+    },
+    [tasks],
+  );
 
   return {
     tasks: filteredTasks,
