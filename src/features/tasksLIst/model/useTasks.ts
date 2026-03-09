@@ -1,11 +1,14 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 
-import type { Task } from 'entities/task/model/types';
+import type { Task } from '../model/types';
+import { useGetTasksQuery } from '../api/tasksApi';
 
 export type Filter = 'all' | 'completed' | 'incomplete';
 
-export const useTasks = (initial: Task[]) => {
-  const [tasks, setTasks] = useState<Task[]>(initial);
+export const useTasks = () => {
+  const { data } = useGetTasksQuery();
+
+  const [tasks, setTasks] = useState<Task[]>(data ?? []);
   const [filter, setFilter] = useState<Filter>('all');
 
   const filteredTasks = useMemo(() => {
@@ -20,27 +23,23 @@ export const useTasks = (initial: Task[]) => {
     }
   }, [tasks, filter]);
 
-  const removeTask = useCallback(
-    (id: string) => {
-      setTasks(tasks.filter((el) => el.id !== id));
-    },
-    [tasks],
-  );
+  const removeTask = useCallback((id: number) => {
+    setTasks((prev) => prev.filter((el) => el.id !== id));
+  }, []);
 
-  const toggleTask = useCallback(
-    (id: string, newValue: boolean) => {
-      setTasks(
-        tasks.map((el) => {
-          if (el.id === id) {
-            return { ...el, completed: newValue };
-          } else {
-            return el;
-          }
-        }),
-      );
-    },
-    [tasks],
-  );
+  const toggleTask = useCallback((id: number, newValue: boolean) => {
+    setTasks((prev) =>
+      prev.map((el) => (el.id === id ? { ...el, completed: newValue } : el)),
+    );
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      console.log('render');
+
+      setTasks(data ?? []);
+    }
+  }, [data]);
 
   return {
     tasks: filteredTasks,

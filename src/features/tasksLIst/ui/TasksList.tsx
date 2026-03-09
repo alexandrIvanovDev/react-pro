@@ -3,15 +3,16 @@ import { Select } from 'antd';
 import { TaskCard } from 'entities/task/ui/TaskCard';
 
 import { useTasks } from '../model/useTasks';
+import { useGetTasksQuery } from '../api/tasksApi';
 
 export const TasksList = () => {
-  const { tasks, filter, removeTask, setFilter, toggleTask } = useTasks([
-    { id: '1', title: 'first', completed: true },
-    { id: '2', title: 'second', completed: false },
-    { id: '3', title: 'third', completed: true },
-    { id: '4', title: 'fourth', completed: false },
-    { id: '5', title: 'fifth', completed: true },
-  ]);
+  const { isLoading } = useGetTasksQuery();
+
+  const { tasks, filter, removeTask, setFilter, toggleTask } = useTasks();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
