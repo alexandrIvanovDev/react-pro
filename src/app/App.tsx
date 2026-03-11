@@ -1,20 +1,9 @@
-import { useState } from 'react';
+import { TaskPage } from 'pages/tasks/ui/TaskPage';
 
-import './App.css';
+import './styles/index.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
-  );
+  return <TaskPage />;
 }
 
 export default App;
