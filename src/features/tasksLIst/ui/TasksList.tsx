@@ -6,12 +6,16 @@ import { useTasks } from '../model/useTasks';
 import { useGetTasksQuery } from '../api/tasksApi';
 
 export const TasksList = () => {
-  const { isLoading } = useGetTasksQuery();
+  const { isLoading, isError } = useGetTasksQuery();
 
   const { tasks, filter, removeTask, setFilter, toggleTask } = useTasks();
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Some error has occurred</div>;
   }
 
   return (
