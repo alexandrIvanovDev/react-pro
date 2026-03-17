@@ -1,6 +1,6 @@
 import { Select } from 'antd';
 
-import { TaskCard } from 'entities/task/ui/TaskCard';
+import { TaskCard } from 'entities/task';
 
 import { useTasks } from '../model/useTasks';
 import { useGetTasksQuery } from '../api/tasksApi';

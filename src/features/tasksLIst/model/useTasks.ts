@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 
-import type { Filter, Task } from '../model/types';
+import type { Filter, Task } from './types';
 import { useGetTasksQuery } from '../api/tasksApi';
 
 export const useTasks = () => {

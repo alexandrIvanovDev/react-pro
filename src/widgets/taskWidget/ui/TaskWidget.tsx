@@ -1,4 +1,4 @@
-import { TasksList } from 'features/tasksLIst/ui/TasksList';
+import { TasksList } from 'features/tasksList';
 
 export const TaskWidget = () => {
   return (
