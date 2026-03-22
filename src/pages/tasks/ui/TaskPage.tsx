@@ -1,4 +1,4 @@
-import { TaskWidget } from 'widgets/taskWidget/ui/TaskWidget';
+import { TaskWidget } from 'widgets/taskWidget';
 
 export const TaskPage = () => {
   return (

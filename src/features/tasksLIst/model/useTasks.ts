@@ -1,46 +1,40 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 
-import type { Task } from 'entities/task/model/types';
+import type { Filter, Task } from './types';
+import { useGetTasksQuery } from '../api/tasksApi';
 
-export type Filter = 'all' | 'completed' | 'incomplete';
+export const useTasks = () => {
+  const { data } = useGetTasksQuery();
 
-export const useTasks = (initial: Task[]) => {
-  const [tasks, setTasks] = useState<Task[]>(initial);
+  const [tasks, setTasks] = useState<Task[]>(data ?? []);
   const [filter, setFilter] = useState<Filter>('all');
 
+  const mounted = useRef(false);
+
   const filteredTasks = useMemo(() => {
-    switch (filter) {
-      case 'incomplete':
-        return tasks.filter((task) => !task.completed);
-      case 'completed':
-        return tasks.filter((task) => task.completed);
-      case 'all':
-      default:
-        return tasks;
+    if (filter === 'completed') {
+      return tasks.filter((el) => el.completed);
     }
-  }, [tasks, filter]);
+    if (filter === 'incomplete') {
+      return tasks.filter((el) => !el.completed);
+    }
+    return tasks;
+  }, [filter, tasks]);
 
-  const removeTask = useCallback(
-    (id: string) => {
-      setTasks(tasks.filter((el) => el.id !== id));
-    },
-    [tasks],
-  );
+  const removeTask = useCallback((id: number) => {
+    setTasks((prev) => prev.filter((el) => el.id !== id));
+  }, []);
 
-  const toggleTask = useCallback(
-    (id: string, newValue: boolean) => {
-      setTasks(
-        tasks.map((el) => {
-          if (el.id === id) {
-            return { ...el, completed: newValue };
-          } else {
-            return el;
-          }
-        }),
-      );
-    },
-    [tasks],
-  );
+  const toggleTask = useCallback((id: number, newValue: boolean) => {
+    setTasks((prev) => prev.map((el) => (el.id === id ? { ...el, completed: newValue } : el)));
+  }, []);
+
+  useEffect(() => {
+    if (!mounted.current && !!data?.length) {
+      setTasks(data ?? []);
+      mounted.current = true;
+    }
+  }, [data]);
 
   return {
     tasks: filteredTasks,
