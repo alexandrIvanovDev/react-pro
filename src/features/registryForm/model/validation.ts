@@ -1,5 +1,7 @@
 import * as yup from 'yup';
 
+export type RegistryFormType = yup.InferType<typeof registryFormSchema>;
+
 export const registryFormSchema = yup
   .object({
     username: yup.string().required('Имя пользователя обязательно').min(2, 'Минимум 2 символа'),
@@ -18,7 +20,6 @@ export const registryFormSchema = yup
 
     socialLinks: yup
       .array()
-      .optional()
       .of(yup.string().url('Некорректный URL').required('Ссылка обязательна')),
   })
   .required();

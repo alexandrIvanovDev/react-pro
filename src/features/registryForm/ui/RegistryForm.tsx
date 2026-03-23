@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { classNames } from 'shared/lib/classNames';
 
 import s from './RegistryForm.module.css';
-import { registryFormSchema } from '../model/validation';
+import { registryFormSchema, type RegistryFormType } from '../model/validation';
 
 export const RegistryForm = () => {
   const {
@@ -13,7 +13,7 @@ export const RegistryForm = () => {
     formState: { errors, isSubmitting },
     reset,
     control,
-  } = useForm({
+  } = useForm<RegistryFormType>({
     resolver: yupResolver(registryFormSchema),
     defaultValues: {
       username: '',
