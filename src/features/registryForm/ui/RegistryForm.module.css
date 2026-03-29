@@ -1,0 +1,66 @@
+.formWrapper {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.element {
+  width: 100%;
+  position: relative;
+}
+
+.element label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.errorInput {
+  border-color: #e74c3c;
+}
+
+.errorMessage {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
+.socialLinksSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-bottom: 16px;
+}
+
+.socialLinkRow {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
