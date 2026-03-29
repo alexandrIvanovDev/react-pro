@@ -11,7 +11,7 @@ export const registryFormSchema = yup
     password: yup
       .string()
       .required('Пароль обязателен')
-      .min(4, 'Пароль должен быть не менее 4 символов'),
+      .min(4, 'Пароль должен быть не менее 6 символов'),
 
     confirmPassword: yup
       .string()
