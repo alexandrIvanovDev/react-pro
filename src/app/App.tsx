@@ -1,8 +1,9 @@
 import './styles/index.css';
-import { RegistryForm } from 'features/registryForm/ui/RegistryForm';
+
+import { DebouncedLogger } from 'features/refExamples/DebouncedLogger';
 
 function App() {
-  return <RegistryForm />;
+  return <DebouncedLogger />;
 }
 
 export default App;
