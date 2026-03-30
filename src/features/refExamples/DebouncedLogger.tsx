@@ -1,4 +1,4 @@
-import { useState, useRef, type ChangeEvent } from 'react';
+import { useState, useRef, type ChangeEvent, useEffect } from 'react';
 
 export const DebouncedLogger = () => {
   const [value, setValue] = useState('');
@@ -16,6 +16,14 @@ export const DebouncedLogger = () => {
       console.log('value', newValue);
     }, 1000);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   return <input value={value} onChange={handleChange} />;
 };
