@@ -10,3 +10,12 @@ export const baseApi = createApi({
   tagTypes: ['Tasks'],
   endpoints: () => ({}),
 });
+
+export const userApi = createApi({
+  reducerPath: 'userApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://api.v2.react-learning.ru/',
+  }),
+  tagTypes: [],
+  endpoints: () => ({}),
+});

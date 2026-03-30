@@ -1,0 +1,8 @@
+.wrapper {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+}
