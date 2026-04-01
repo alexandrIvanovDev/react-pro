@@ -1,9 +1,31 @@
-import './styles/index.css';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
-import { DebouncedLogger } from 'features/refExamples/DebouncedLogger';
+import './styles/index.css';
+import { AuthProvider } from './providers/authProvider/AuthContext';
+import { ProtectedRoute } from './providers/ProtectedRoute/ProtectedRoute';
+import { LoginPage } from 'features/authRouting/LoginPage';
+import { Header } from 'widgets/Header/Header';
+import { Profile } from 'pages/profile/ProfilePage';
+import { PublicPage } from 'pages/public/PublicPage';
 
 function App() {
-  return <DebouncedLogger />;
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Header />
+
+        <Routes>
+          <Route path='/' element={<div>Home</div>} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/public' element={<PublicPage />} />
+
+          <Route element={<ProtectedRoute />}>
+            <Route path='/profile' element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
 export default App;
