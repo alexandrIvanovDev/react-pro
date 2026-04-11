@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react';
-
-type Position = 'top' | 'bottom' | 'left' | 'right';
+import type { TooltipPosition } from './TooltipPosition';
 
 export type Props = {
   children: ReactNode;
   text: string;
-  position?: Position;
+  position?: TooltipPosition;
   className?: string;
 };

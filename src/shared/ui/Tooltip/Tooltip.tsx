@@ -4,8 +4,14 @@ import { classNames } from 'shared/lib/classNames';
 
 import cl from './Tooltip.module.css';
 import type { Props } from './types';
+import { TooltipPosition } from './TooltipPosition';
 
-export const Tooltip = ({ children, text, position = 'top', className = '' }: Props) => {
+export const Tooltip = ({
+  children,
+  text,
+  position = TooltipPosition.TOP,
+  className = '',
+}: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
 
@@ -27,19 +33,19 @@ export const Tooltip = ({ children, text, position = 'top', className = '' }: Pr
     const centerV = triggerRect.top + triggerRect.height / 2 - tooltipRect.height / 2;
 
     switch (position) {
-      case 'top':
+      case TooltipPosition.TOP:
         top = triggerRect.top - tooltipRect.height - gap;
         left = centerH;
         break;
-      case 'bottom':
+      case TooltipPosition.BOTTOM:
         top = triggerRect.bottom + gap;
         left = centerH;
         break;
-      case 'left':
+      case TooltipPosition.LEFT:
         top = centerV;
         left = triggerRect.left - tooltipRect.width - gap;
         break;
-      case 'right':
+      case TooltipPosition.RIGHT:
         top = centerV;
         left = triggerRect.right + gap;
         break;
