@@ -20,6 +20,7 @@ export const Header = () => {
     <nav className={cl.wrapper}>
       <Link to='/'>Главная</Link>
       <Link to='/public'>Публичная</Link>
+      <Link to='/portal'>Портал</Link>
       {isAuth ? <Link to='/profile'>Профиль</Link> : <Link to='/login'>Войти</Link>}
     </nav>
   );

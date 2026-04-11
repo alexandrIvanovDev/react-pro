@@ -5,6 +5,8 @@ import { classNames } from 'shared/lib/classNames';
 
 import s from './LoginForm.module.css';
 import { loginFormSchema, type LoginFormType } from './validation';
+import { Tooltip } from 'shared/ui/Tooltip/Tooltip';
+import { TooltipPosition } from 'shared/ui/Tooltip/TooltipPosition';
 
 type Props = {
   submit: (data: LoginFormType) => void;
@@ -45,18 +47,22 @@ export const LoginForm = ({ submit }: Props) => {
 
         <div className={s.element}>
           <label htmlFor='password'>Пароль</label>
-          <input
-            id='password'
-            type='password'
-            {...register('password')}
-            className={classNames(s.input, [errors.password && s.errorInput])}
-          />
+          <Tooltip text='It is password'>
+            <input
+              id='password'
+              type='password'
+              {...register('password')}
+              className={classNames(s.input, [errors.password && s.errorInput])}
+            />
+          </Tooltip>
           {errors.password && <span className={s.errorMessage}>{errors.password.message}</span>}
         </div>
 
-        <button type='submit' disabled={isSubmitting}>
-          Вход
-        </button>
+        <Tooltip text='Some tooltip' position={TooltipPosition.BOTTOM}>
+          <button type='submit' disabled={isSubmitting}>
+            Вход
+          </button>
+        </Tooltip>
       </form>
     </div>
   );
